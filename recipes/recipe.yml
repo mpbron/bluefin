@@ -18,9 +18,13 @@ modules:
   - type: rpm-ostree
     repos:
       - https://negativo17.org/repos/fedora-multimedia.repo
+      - https://copr.fedorainfracloud.org/coprs/ryanabx/cosmic-epoch/repo/fedora-%OS_VERSION%/ryanabx-cosmic-epoch-fedora-%OS_VERSION%.repo
     install:
-      # - micro
-      # - starship
+      - cosmic-desktop
+      - power-profiles-daemon
+      - gnome-keyring
+      - NetworkManager-tui
+      - NetworkManager-openvpn
     remove:
       # example: removing firefox (in favor of the flatpak)
       # "firefox" is the main package, "firefox-langpacks" is a dependency
@@ -46,6 +50,10 @@ modules:
   - type: akmods
     install:
       - evdi
+
+  - type: script
+    scripts:
+      - cosmic.sh
 
   - type: signing # this sets up the proper policy & signing files for signed images to work fully
 
