@@ -24,6 +24,7 @@ jobs:
           # !! Add your recipes here 
           - recipe_kde_nvidia.yml
           - recipe_gnome_surface.yml
+          - recipe_kde_surface.yml
     steps:
        # the build is fully handled by the reusable github action
       - name: Build Custom Image
