@@ -53,6 +53,7 @@ modules:
       remove:
       # - org.gnome.eog
   - type: akmods
+    base: surface
     install:
       - evdi
 
