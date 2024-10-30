@@ -5,7 +5,7 @@ description: Aurora image added with displaylink drivers
 
 # the base image to build on top of (FROM) and the version tag to use
 base-image: ghcr.io/ublue-os/aurora-dx-surface
-image-version: gts # latest is also supported if you want new updates ASAP
+image-version: stable # latest is also supported if you want new updates ASAP
 
 # module configuration, executed in order
 # you can include multiple instances of the same module
@@ -20,11 +20,11 @@ modules:
       - https://negativo17.org/repos/fedora-multimedia.repo
       - https://copr.fedorainfracloud.org/coprs/ryanabx/cosmic-epoch/repo/fedora-%OS_VERSION%/ryanabx-cosmic-epoch-fedora-%OS_VERSION%.repo
     install:
-      - cosmic-desktop
-      - power-profiles-daemon
-      - NetworkManager-tui
-      - NetworkManager-openvpn
-      - gnome-keyring
+      # - cosmic-desktop
+      # - power-profiles-daemon
+      # - NetworkManager-tui
+      # - NetworkManager-openvpn
+      # - gnome-keyring
       - fira-code-fonts
       - mozilla-fira-sans-fonts
       - msr-tools

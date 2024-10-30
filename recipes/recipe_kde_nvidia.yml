@@ -5,7 +5,7 @@ description: Aurora image added with displaylink drivers
 
 # the base image to build on top of (FROM) and the version tag to use
 base-image: ghcr.io/ublue-os/aurora-dx-nvidia
-image-version: gts # latest is also supported if you want new updates ASAP
+image-version: stable # latest is also supported if you want new updates ASAP
 
 # module configuration, executed in order
 # you can include multiple instances of the same module
@@ -20,11 +20,31 @@ modules:
       - https://negativo17.org/repos/fedora-multimedia.repo
       - https://copr.fedorainfracloud.org/coprs/ryanabx/cosmic-epoch/repo/fedora-%OS_VERSION%/ryanabx-cosmic-epoch-fedora-%OS_VERSION%.repo
     install:
-      - cosmic-desktop
-      - power-profiles-daemon
-      - gnome-keyring
-      - NetworkManager-tui
-      - NetworkManager-openvpn
+      - blueman 
+      - brightnessctl
+      - dmenu 
+      - feh 
+      - fira-code-fonts 
+      - grim 
+      - hyprland 
+      - i3 
+      - inxi 
+      - kanshi 
+      - mozilla-fira-sans-fonts
+      - nitrogen 
+      - okular 
+      - onedrive 
+      - papirus-icon-theme 
+      - picom 
+      - rofi-wayland 
+      - slurp 
+      - sway
+      - swaylock
+      - waybar
+      - wlr-randr 
+      - wlsunset 
+      - wmctrl
+      - xdg-desktop-portal-hyprland
     remove:
       # example: removing firefox (in favor of the flatpak)
       # "firefox" is the main package, "firefox-langpacks" is a dependency
