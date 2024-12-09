@@ -46,6 +46,7 @@ modules:
       - wlsunset 
       - wmctrl
       - xdg-desktop-portal-hyprland
+      - cosmic-desktop
     remove:
       # example: removing firefox (in favor of the flatpak)
       # "firefox" is the main package, "firefox-langpacks" is a dependency
