@@ -1,0 +1,67 @@
+# image will be published to ghcr.io/<user>/<name>
+name: bluefin
+# description will be included in the image's metadata
+description: Aurora image added with displaylink drivers
+
+# the base image to build on top of (FROM) and the version tag to use
+base-image: ghcr.io/ublue-os/aurora-dx
+image-version: stable # latest is also supported if you want new updates ASAP
+
+# module configuration, executed in order
+# you can include multiple instances of the same module
+modules:
+  - type: files
+    files:
+      - source: system
+        destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
+
+  - type: rpm-ostree
+    repos:
+      - https://negativo17.org/repos/fedora-multimedia.repo
+      - https://copr.fedorainfracloud.org/coprs/ryanabx/cosmic-epoch/repo/fedora-%OS_VERSION%/ryanabx-cosmic-epoch-fedora-%OS_VERSION%.repo
+    install:
+      - blueman 
+      - brightnessctl
+      - dmenu 
+      - feh 
+      - fira-code-fonts 
+      - grim 
+      - hyprland 
+      - i3 
+      - inxi 
+      - kanshi 
+      - mozilla-fira-sans-fonts
+      - nitrogen 
+      - okular 
+      - onedrive 
+      - papirus-icon-theme
+      - papirus-icon-theme-dark
+      - papirus-icon-theme-light
+      - plasma-workspace-x11
+      - picom 
+      - rofi-wayland 
+      - slurp 
+      - sway
+      - swaylock
+      - waybar
+      - wlr-randr 
+      - wlsunset 
+      - wmctrl
+      - xdg-desktop-portal-hyprland
+      - cosmic-desktop
+    remove: []
+      # example: removing firefox (in favor of the flatpak)
+      # "firefox" is the main package, "firefox-langpacks" is a dependency
+      # - firefox
+      # - firefox-langpacks # also remove firefox dependency (not required for all packages, this is a special case)
+
+  - type: akmods
+    install:
+      - evdi
+
+  # - type: script
+  #   scripts:
+  #     - cosmic.sh
+
+  - type: signing # this sets up the proper policy & signing files for signed images to work fully
+
