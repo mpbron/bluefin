@@ -32,7 +32,7 @@ modules:
       - kanshi 
       - mozilla-fira-sans-fonts
       - nitrogen 
-      - okular 
+      - okular
       - onedrive 
       - papirus-icon-theme
       - papirus-icon-theme-dark
@@ -50,6 +50,8 @@ modules:
       - xdg-desktop-portal-hyprland
       - cosmic-desktop
       - dialog
+      - pavucontrol
+      - gnome-keyring
     remove: []
       # example: removing firefox (in favor of the flatpak)
       # "firefox" is the main package, "firefox-langpacks" is a dependency
