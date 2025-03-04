@@ -1,5 +1,5 @@
 # image will be published to ghcr.io/<user>/<name>
-name: bluefin-kde
+name: bluefin-kde-evdi
 # description will be included in the image's metadata
 description: Aurora image added with displaylink drivers
 
@@ -59,9 +59,9 @@ modules:
       # - firefox
       # - firefox-langpacks # also remove firefox dependency (not required for all packages, this is a special case)
 
-  # - type: akmods
-  #   install:
-  #     - evdi
+  - type: akmods
+    install:
+      - evdi
 
   - type: script
     scripts:
