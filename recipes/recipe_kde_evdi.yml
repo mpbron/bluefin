@@ -4,7 +4,7 @@ name: bluefin-kde-evdi
 description: Aurora image added with displaylink drivers
 
 # the base image to build on top of (FROM) and the version tag to use
-base-image: ghcr.io/ublue-os/aurora-dx
+base-image: ghcr.io/ublue-os/aurora-dx-hwe
 image-version: stable # latest is also supported if you want new updates ASAP
 
 # module configuration, executed in order
