@@ -4,7 +4,7 @@ name: bluefin-kde-evdi
 description: Aurora image added with displaylink drivers
 
 # the base image to build on top of (FROM) and the version tag to use
-base-image: ghcr.io/ublue-os/aurora-dx-hwe
+base-image: ghcr.io/ublue-os/aurora-dx
 image-version: latest # latest is also supported if you want new updates ASAP
 
 # module configuration, executed in order
@@ -67,9 +67,19 @@ modules:
       # - firefox
       # - firefox-langpacks # also remove firefox dependency (not required for all packages, this is a special case)
 
-  - type: akmods
-    install:
-      - evdi
+
+  - type: containerfile
+    snippets:
+      - COPY --from=ghcr.io/ublue-os/akmods:main-41-6.12.15-200.fc41.x86_64 /rpms /tmp/rpms
+      - COPY --from=ghcr.io/ublue-os/akmods:main-41-6.12.15-200.fc41.x86_64 /kernel-rpms /tmp/rpms/kernel
+      - RUN find /tmp/rpms
+      - RUN rpm -q ublue-os-akmods-addons || rpm-ostree install /tmp/rpms/ublue-os/ublue-os-akmods-addons*.rpm
+      - RUN rpm-ostree install /tmp/rpms/kmods/kmod-evdi*.rpm
+
+  # - type: akmods
+  #   base: main
+  #   install:
+  #     - evdi
 
   - type: script
     scripts:
