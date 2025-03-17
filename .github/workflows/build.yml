@@ -10,6 +10,7 @@ on:
   pull_request:
   workflow_dispatch: # allow manually triggering builds
 jobs:
+  
   bluebuild:
     name: Build Custom Image
     runs-on: ubuntu-latest
@@ -28,7 +29,17 @@ jobs:
           - recipe_kde.yml
           - recipe_kde_evdi.yml
     steps:
-       # the build is fully handled by the reusable github action
+      - name: Inspect image and extract label
+        run: |
+          LABEL_VALUE=bazzite-$(skopeo inspect docker://ghcr.io/ublue-os/aurora-dx:stable | jq -r '"\(.Labels["org.opencontainers.image.version"] | split(".")[0])-\(.Labels["ostree.linux"])"')
+          echo "kernel_version=$LABEL_VALUE" >> $GITHUB_ENV
+      - name: Display extracted label
+        run: |
+          echo "Extracted ostree.linux label: $kernel_version"
+      - name: Modify file with extracted label
+        run: |
+          sed -i "s/KERNEL_VERSION/$kernel_version/g" ./recipes/recipe_kde_evdi.yml
+            # the build is fully handled by the reusable github action
       - name: Build Custom Image
         uses: blue-build/github-action@v1.8
         with:
