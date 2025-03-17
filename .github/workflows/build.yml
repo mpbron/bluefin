@@ -41,6 +41,9 @@ jobs:
         run: |
           sed -i "s/KERNEL_VERSION/$kernel_version/g" ./recipes/recipe_kde_evdi.yml
             # the build is fully handled by the reusable github action
+      - name: View changed file
+        run: |
+          cat ./recipes/recipe_kde_evdi.yml
       - name: Build Custom Image
         uses: blue-build/github-action@v1.8
         with:
