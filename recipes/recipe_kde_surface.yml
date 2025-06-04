@@ -18,7 +18,8 @@ modules:
 
   - type: dnf
     repos:
-      - https://pkg.surfacelinux.com/fedora/linux-surface.repo
+      files:
+        - https://pkg.surfacelinux.com/fedora/linux-surface.repo
     install:
       allow-erasing: true
       packages:
@@ -30,17 +31,19 @@ modules:
         
   - type: dnf
     repos:
-      - https://pkg.surfacelinux.com/fedora/linux-surface.repo
+      files:
+        - https://pkg.surfacelinux.com/fedora/linux-surface.repo
     install:
       packages: 
         - surface-secureboot
 
   - type: dnf
     repos:
-      - https://download.opensuse.org/repositories/multimedia:proaudio/Fedora_%OS_VERSION%/multimedia:proaudio.repo
-      - https://pkg.surfacelinux.com/fedora/linux-surface.repo
-      - https://negativo17.org/repos/fedora-multimedia.repo
-      - https://copr.fedorainfracloud.org/coprs/ryanabx/cosmic-epoch/repo/fedora-%OS_VERSION%/ryanabx-cosmic-epoch-fedora-%OS_VERSION%.repo
+      files:
+        - https://download.opensuse.org/repositories/multimedia:proaudio/Fedora_%OS_VERSION%/multimedia:proaudio.repo
+        - https://pkg.surfacelinux.com/fedora/linux-surface.repo
+        - https://negativo17.org/repos/fedora-multimedia.repo
+        - https://copr.fedorainfracloud.org/coprs/ryanabx/cosmic-epoch/repo/fedora-%OS_VERSION%/ryanabx-cosmic-epoch-fedora-%OS_VERSION%.repo
     install:
       packages:
         - cosmic-desktop
@@ -53,7 +56,6 @@ modules:
         - papirus-icon-theme-dark
         - papirus-icon-theme-light
         - cpupower-gui
-    remove: []
       # example: removing firefox (in favor of the flatpak)
       # "firefox" is the main package, "firefox-langpacks" is a dependency
       # - firefox
