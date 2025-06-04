@@ -16,12 +16,18 @@ modules:
         destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
 
   - type: dnf
-    repos: 
+    repos:
       files:
         - https://pkg.surfacelinux.com/fedora/linux-surface.repo
-    replace:
-      - packages:
-          - https://github.com/linux-surface/linux-surface/releases/download/silverblue-20201215-1/kernel-20201215-1.x86_64.rpm
+    install:
+      allow-erasing: true
+      packages:
+        - https://github.com/linux-surface/linux-surface/releases/download/silverblue-20201215-1/kernel-20201215-1.x86_64.rpm
+        - kernel-surface 
+        - iptsd 
+        - libwacom-surface
+        - libwacom-surface-data
+        - kernel-surface-devel
     remove:
       packages:
         - kernel-core 
@@ -29,20 +35,6 @@ modules:
         - kernel-modules-extra
         - libwacom 
         - libwacom-data
-  
-
-  - type: dnf
-    repos:
-      files:
-        - https://pkg.surfacelinux.com/fedora/linux-surface.repo
-    install:
-      allow-erasing: true
-      packages:
-        - kernel-surface 
-        - iptsd 
-        - libwacom-surface
-        - libwacom-surface-data
-        - kernel-surface-devel
         
   - type: dnf
     repos:
