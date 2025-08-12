@@ -29,7 +29,7 @@ jobs:
           - recipe_kde.yml
           - recipe_kde_evdi.yml
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Inspect image and extract label
         run: |
           LABEL_VALUE=bazzite-$(skopeo inspect docker://ghcr.io/ublue-os/aurora-dx-hwe:latest | jq -r '"\(.Labels["org.opencontainers.image.version"] | split(".")[0])-\(.Labels["ostree.linux"])"' | sed 's/latest-//')
