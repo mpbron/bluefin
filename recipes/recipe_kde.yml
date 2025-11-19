@@ -30,7 +30,7 @@ modules:
       - i3 
       - inxi 
       - kanshi 
-      - mozilla-fira-sans-fonts
+      - bbox-firago-fonts
       - nitrogen 
       - okular
       - onedrive 
@@ -64,8 +64,8 @@ modules:
       - dunst
       - kitty
       - thunar
-      - qt5-wayland
-      - qt6-wayland
+      - qt5-qtwayland
+      - qt6-qtwayland
       - hyprlock
     remove: []
       # example: removing firefox (in favor of the flatpak)
