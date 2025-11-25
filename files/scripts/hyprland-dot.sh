@@ -9,9 +9,6 @@ git clone https://github.com/mylinuxforwork/dotfiles.git $REPO_DIR --single-bran
 # --------------------------------------------------------------
 # Prebuild Packages
 # --------------------------------------------------------------
-echo "Installing eza v0.23.0"
-# https://github.com/eza-community/eza/releases
-cp $REPO_DIR/setup/packages/eza /usr/bin
 cp $REPO_DIR/setup/packages/matugen /usr/bin
 
 # --------------------------------------------------------------
@@ -46,16 +43,16 @@ pip install waypaper
 # Cursors
 # --------------------------------------------------------------
 
-source $REPO_DIR/setup/_cursors.sh
+# source $REPO_DIR/setup/_cursors.sh
 
-# --------------------------------------------------------------
-# Fonts
-# --------------------------------------------------------------
+# # --------------------------------------------------------------
+# # Fonts
+# # --------------------------------------------------------------
 
-source $REPO_DIR/setup/_fonts.sh
+# source $REPO_DIR/setup/_fonts.sh
 
 # --------------------------------------------------------------
 # Icons
 # --------------------------------------------------------------
 
-source $REPO_DIR/setup/_icons.sh
+# source $REPO_DIR/setup/_icons.sh

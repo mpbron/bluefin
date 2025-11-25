@@ -2,11 +2,10 @@ type: dnf
 repos:
   copr:
     - solopasha/hyprland
+    - alternateved/eza
     - erikreider/SwayNotificationCenter
     - peterwu/rendezvous
     - tofik/nwg-shell
-  files:
-    - https://download.opensuse.org/repositories/multimedia:proaudio/Fedora_%OS_VERSION%/multimedia:proaudio.repo
 install:
   allow-erasing: true
   packages:
@@ -23,8 +22,8 @@ install:
     - libnotify
     - kwallet
     - kitty
-    - qt5-wayland
-    - qt6-wayland
+    #- qt5-qtwayland
+    #- qt6-qtwayland
     - fastfetch
     - eza
     - python-pip
@@ -34,7 +33,7 @@ install:
     - brightnessctl
     - nm-connection-editor
     - network-manager-applet
-    - imagemagick
+    - ImageMagick
     - jq
     - xclip
     - neovim
@@ -48,7 +47,7 @@ install:
     - rofi-wayland
     #- polkit-gnome
     # - zsh
-    - hyprpolkitagent
+    # hyprpolkitagent
     #- zsh-completions
     - fzf
     - pavucontrol
@@ -59,8 +58,6 @@ install:
     - wlogout
     - waypaper
     - grimblast
-    - bibata-cursor-theme
     - nwg-dock-hyprland
     - power-profiles-daemon
-    - python-pywalfox
     - vlc
