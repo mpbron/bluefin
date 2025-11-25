@@ -28,6 +28,7 @@ jobs:
           #- recipe_kde_surface.yml
           - recipe_kde.yml
           - recipe_kde_evdi.yml
+          - recipe_hyprland.yml
     steps:
       - uses: actions/checkout@v5
       - name: Inspect image and extract label

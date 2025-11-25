@@ -1,10 +1,10 @@
 # image will be published to ghcr.io/<user>/<name>
 name: bluefin
 # description will be included in the image's metadata
-description: Aurora image added with displaylink drivers
+description: Bazzite image added with displaylink drivers
 
 # the base image to build on top of (FROM) and the version tag to use
-base-image: ghcr.io/ublue-os/aurora-dx-nvidia
+base-image: ghcr.io/ublue-os/bazzite-dx-nvidia
 image-version: latest # latest is also supported if you want new updates ASAP
 
 # module configuration, executed in order
@@ -15,10 +15,10 @@ modules:
       - source: system
         destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
 
-  - type: rpm-ostree
+  - type: dnf
     repos:
       - https://negativo17.org/repos/fedora-multimedia.repo
-      - https://copr.fedorainfracloud.org/coprs/ryanabx/cosmic-epoch/repo/fedora-%OS_VERSION%/ryanabx-cosmic-epoch-fedora-%OS_VERSION%.repo
+     
     install:
       - blueman 
       - brightnessctl
@@ -30,7 +30,7 @@ modules:
       - i3 
       - inxi 
       - kanshi 
-      - mozilla-fira-sans-fonts
+      - bbox-firago-fonts
       - nitrogen 
       - okular 
       - onedrive 
@@ -51,15 +51,6 @@ modules:
       - cosmic-desktop
       - dialog
       - ksshaskpass
-    remove: []
-      # example: removing firefox (in favor of the flatpak)
-      # "firefox" is the main package, "firefox-langpacks" is a dependency
-      # - firefox
-      # - firefox-langpacks # also remove firefox dependency (not required for all packages, this is a special case)
-
-  # - type: akmods
-  #   install:
-  #     - evdi
 
   - type: script
     scripts:

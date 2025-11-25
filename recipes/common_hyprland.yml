@@ -1,0 +1,66 @@
+type: dnf
+repos:
+  copr:
+    - solopasha/hyprland
+    - erikreider/SwayNotificationCenter
+    - peterwu/rendezvous
+    - tofik/nwg-shell
+  files:
+    - https://download.opensuse.org/repositories/multimedia:proaudio/Fedora_%OS_VERSION%/multimedia:proaudio.repo
+install:
+  allow-erasing: true
+  packages:
+    - hyprland
+    - swaylock
+    - waybar
+    - figlet
+    - hyprpaper
+    - hyprlock
+    - hypridle
+    - hyprpicker
+    - xdg-desktop-portal-gtk
+    - xdg-desktop-portal-hyprland
+    - libnotify
+    - kwallet
+    - kitty
+    - qt5-wayland
+    - qt6-wayland
+    - fastfetch
+    - eza
+    - python-pip
+    - python3-gobject
+    - python-screeninfo
+    - tumbler
+    - brightnessctl
+    - nm-connection-editor
+    - network-manager-applet
+    - imagemagick
+    - jq
+    - xclip
+    - neovim
+    - blueman
+    - grim
+    - slurp
+    - cliphist
+    - nwg-clipman
+    - nwg-look
+    - qt6ct
+    - rofi-wayland
+    #- polkit-gnome
+    # - zsh
+    - hyprpolkitagent
+    #- zsh-completions
+    - fzf
+    - pavucontrol
+    - papirus-icon-theme
+    #- breeze
+    - SwayNotificationCenter
+    - gvfs
+    - wlogout
+    - waypaper
+    - grimblast
+    - bibata-cursor-theme
+    - nwg-dock-hyprland
+    - power-profiles-daemon
+    - python-pywalfox
+    - vlc
