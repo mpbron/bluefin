@@ -15,11 +15,9 @@ modules:
       - source: system
         destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
 
-  - type: dnf
-    repos:
-      - https://negativo17.org/repos/fedora-multimedia.repo
-     
+  - type: dnf     
     install:
+      packages:
       - blueman 
       - brightnessctl
       - dmenu 
@@ -48,7 +46,6 @@ modules:
       - wlsunset 
       - wmctrl
       - xdg-desktop-portal-hyprland
-      - cosmic-desktop
       - dialog
       - ksshaskpass
 
