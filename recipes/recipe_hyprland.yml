@@ -1,0 +1,29 @@
+# image will be published to ghcr.io/<user>/<name>
+name: bluefin
+# description will be included in the image's metadata
+description: Bazzite image added with displaylink drivers
+
+# the base image to build on top of (FROM) and the version tag to use
+base-image: ghcr.io/ublue-os/aurora-dx
+image-version: stable # latest is also supported if you want new updates ASAP
+
+# module configuration, executed in order
+# you can include multiple instances of the same module
+modules:
+  - type: files
+    files:
+      - source: system
+        destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
+
+  - from-file: common_hyprland.yml
+
+  - type: script
+    scripts:
+      - installpositron.sh
+
+  - type: script
+    scripts: 
+      - hyprland-dot.sh
+
+  - type: signing # this sets up the proper policy & signing files for signed images to work fully
+

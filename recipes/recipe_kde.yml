@@ -15,67 +15,59 @@ modules:
       - source: system
         destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
 
-  - type: rpm-ostree
+  - type: dnf  
     repos:
-      - https://negativo17.org/repos/fedora-multimedia.repo
-      - https://copr.fedorainfracloud.org/coprs/solopasha/hyprland/repo/fedora-%OS_VERSION%/solophasha=hyprland-fedora-%OS_VERSION%.repo
+      copr:
+        - solopasha/hyprland
     install:
-      - blueman 
-      - brightnessctl
-      - dmenu 
-      - feh 
-      - fira-code-fonts 
-      - grim 
-      - hyprland 
-      - i3 
-      - inxi 
-      - kanshi 
-      - mozilla-fira-sans-fonts
-      - nitrogen 
-      - okular
-      - onedrive 
-      - papirus-icon-theme
-      - papirus-icon-theme-dark
-      - papirus-icon-theme-light
-      - plasma-workspace-x11
-      - picom 
-      - rofi-wayland 
-      - slurp 
-      - sway
-      - swaylock
-      - waybar
-      - wlr-randr 
-      - wlsunset 
-      - wmctrl
-      - xdg-desktop-portal-hyprland
-      - dialog
-      - pavucontrol
-      - gnome-keyring
-      - figlet
-      - hypridle
-      - hyprpaper
-      - hyprpicker
-      - nautilus
-      - mpv
-      - imv
-      - ffmpegthumbnailer
-      - neovim
-      - ksshaskpass
-      - dunst
-      - kitty
-      - thunar
-      - qt5-wayland
-      - qt6-wayland
-      - hyprlock
-    remove: []
-      # example: removing firefox (in favor of the flatpak)
-      # "firefox" is the main package, "firefox-langpacks" is a dependency
-      # - firefox
-      # - firefox-langpacks # also remove firefox dependency (not required for all packages, this is a special case)
-
-  # - type: akmods
-  #   install:
-  #     - evdi
+      packages:
+        - blueman 
+        - brightnessctl
+        - dmenu 
+        - feh 
+        - fira-code-fonts 
+        - grim 
+        - hyprland 
+        - i3 
+        - inxi 
+        - kanshi 
+        - bbox-firago-fonts
+        - nitrogen 
+        - okular
+        - onedrive 
+        - papirus-icon-theme
+        - papirus-icon-theme-dark
+        - papirus-icon-theme-light
+        - plasma-workspace-x11
+        - picom 
+        - rofi-wayland 
+        - slurp 
+        - sway
+        - swaylock
+        - waybar
+        - wlr-randr 
+        - wlsunset 
+        - wmctrl
+        - xdg-desktop-portal-hyprland
+        - dialog
+        - pavucontrol
+        - gnome-keyring
+        - figlet
+        - hypridle
+        - hyprpaper
+        - hyprpicker
+        - nautilus
+        - mpv
+        - imv
+        - ffmpegthumbnailer
+        - neovim
+        - ksshaskpass
+        - dunst
+        - kitty
+        - thunar
+        - qt5-qtwayland
+        - qt6-qtwayland
+        - hyprlock
 
   - type: script
     scripts:

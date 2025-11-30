@@ -1,0 +1,63 @@
+type: dnf
+repos:
+  copr:
+    - solopasha/hyprland
+    - alternateved/eza
+    - erikreider/SwayNotificationCenter
+    - peterwu/rendezvous
+    - tofik/nwg-shell
+install:
+  allow-erasing: true
+  packages:
+    - hyprland
+    - swaylock
+    - waybar
+    - figlet
+    - hyprpaper
+    - hyprlock
+    - hypridle
+    - hyprpicker
+    - xdg-desktop-portal-gtk
+    - xdg-desktop-portal-hyprland
+    - libnotify
+    - kwallet
+    - kitty
+    #- qt5-qtwayland
+    #- qt6-qtwayland
+    - fastfetch
+    - eza
+    - python-pip
+    - python3-gobject
+    - python-screeninfo
+    - tumbler
+    - brightnessctl
+    - nm-connection-editor
+    - network-manager-applet
+    - ImageMagick
+    - jq
+    - xclip
+    - neovim
+    - blueman
+    - grim
+    - slurp
+    - cliphist
+    - nwg-clipman
+    - nwg-look
+    - qt6ct
+    - rofi-wayland
+    #- polkit-gnome
+    # - zsh
+    # hyprpolkitagent
+    #- zsh-completions
+    - fzf
+    - pavucontrol
+    - papirus-icon-theme
+    #- breeze
+    - SwayNotificationCenter
+    - gvfs
+    - wlogout
+    - waypaper
+    - grimblast
+    - nwg-dock-hyprland
+    - power-profiles-daemon
+    - vlc
