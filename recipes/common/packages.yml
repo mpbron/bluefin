@@ -1,10 +1,9 @@
 type: dnf
-repos:
-  install:
-    allow-erasing: true
-    packages:
-      - okular
-      - onedrive 
-      - pavucontrol
-      - neovim
-      - kitty
+install:
+  allow-erasing: true
+  packages:
+    - okular
+    - onedrive 
+    - pavucontrol
+    - neovim
+    - kitty

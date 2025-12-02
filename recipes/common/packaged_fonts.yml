@@ -1,0 +1,6 @@
+type: dnf
+install:
+  allow-erasing: true
+  packages:
+    - fira-code-fonts 
+    - bbox-firago-fonts

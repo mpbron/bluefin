@@ -1,8 +1,7 @@
 type: dnf
-repos:
-  install:
-    allow-erasing: true
-    packages:
-      - papirus-icon-theme
-      - papirus-icon-theme-dark
-      - papirus-icon-theme-light
+install:
+  allow-erasing: true
+  packages:
+    - papirus-icon-theme
+    - papirus-icon-theme-dark
+    - papirus-icon-theme-light
