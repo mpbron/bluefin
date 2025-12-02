@@ -14,7 +14,11 @@ modules:
     files:
       - source: system
         destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
-
+  
+  - from-file: common/icons.yml
+  - from-file: common/packaged_fonts.yml
+  - from-file: common/packages.yml
+  
   - type: dnf     
     repos:
       copr:
@@ -25,19 +29,12 @@ modules:
       - brightnessctl
       - dmenu 
       - feh 
-      - fira-code-fonts 
       - grim 
       - hyprland 
       - i3 
       - inxi 
       - kanshi 
-      - bbox-firago-fonts
       - nitrogen 
-      - okular 
-      - onedrive 
-      - papirus-icon-theme
-      - papirus-icon-theme-dark
-      - papirus-icon-theme-light
       - plasma-workspace-x11
       - picom 
       - rofi-wayland 

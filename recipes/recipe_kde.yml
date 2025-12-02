@@ -14,61 +14,9 @@ modules:
     files:
       - source: system
         destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
-
-  - type: dnf  
-    repos:
-      copr:
-        - solopasha/hyprland
-    install:
-      packages:
-        - blueman 
-        - brightnessctl
-        - dmenu 
-        - feh 
-        - fira-code-fonts 
-        - grim 
-        - hyprland 
-        - i3 
-        - inxi 
-        - kanshi 
-        - bbox-firago-fonts
-        - nitrogen 
-        - okular
-        - onedrive 
-        - papirus-icon-theme
-        - papirus-icon-theme-dark
-        - papirus-icon-theme-light
-        - plasma-workspace-x11
-        - picom 
-        - rofi-wayland 
-        - slurp 
-        - sway
-        - swaylock
-        - waybar
-        - wlr-randr 
-        - wlsunset 
-        - wmctrl
-        - xdg-desktop-portal-hyprland
-        - dialog
-        - pavucontrol
-        - gnome-keyring
-        - figlet
-        - hypridle
-        - hyprpaper
-        - hyprpicker
-        - nautilus
-        - mpv
-        - imv
-        - ffmpegthumbnailer
-        - neovim
-        - ksshaskpass
-        - dunst
-        - kitty
-        - thunar
-        - qt5-qtwayland
-        - qt6-qtwayland
-        - hyprlock
-
+  - from-file: common/icons.yml
+  - from-file: common/packaged_fonts.yml
+  - from-file: common/packages.yml
   - type: script
     scripts:
       - installpositron.sh

@@ -14,8 +14,10 @@ modules:
     files:
       - source: system
         destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
-
-  - from-file: common_hyprland.yml
+  - from-file: common/icons.yml
+  - from-file: common/packaged_fonts.yml
+  - from-file: common/packages.yml
+  - from-file: common/hyprland.yml
 
   - type: script
     scripts:
