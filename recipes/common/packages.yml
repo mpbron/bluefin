@@ -1,5 +1,8 @@
 type: dnf
 install:
+  repos:
+    copr:
+      - zeno/scrcpy
   allow-erasing: true
   packages:
     - okular
@@ -7,3 +10,4 @@ install:
     - pavucontrol
     - neovim
     - kitty
+    - scrcpy
