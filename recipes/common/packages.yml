@@ -1,8 +1,8 @@
 type: dnf
+repos:
+  copr:
+    - zeno/scrcpy
 install:
-  repos:
-    copr:
-      - zeno/scrcpy
   allow-erasing: true
   packages:
     - okular
