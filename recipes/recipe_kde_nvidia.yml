@@ -20,9 +20,6 @@ modules:
   - from-file: common/packages.yml
   
   - type: dnf     
-    repos:
-      copr:
-        - solopasha/hyprland
     install:
       packages:
       - blueman 
@@ -30,7 +27,6 @@ modules:
       - dmenu 
       - feh 
       - grim 
-      - hyprland 
       - i3 
       - inxi 
       - kanshi 
@@ -45,7 +41,6 @@ modules:
       - wlr-randr 
       - wlsunset 
       - wmctrl
-      - xdg-desktop-portal-hyprland
       - dialog
       - ksshaskpass
 
