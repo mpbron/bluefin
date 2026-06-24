@@ -1,0 +1,17 @@
+- type: default-flatpaks
+  configurations:
+    - scope: user
+      repo:
+        # you can override the title to make inclusion of both system and user repos clearer
+        title: Flathub (user)
+    - notify: true
+      scope: system
+      repo:
+        title: Flathub (system)
+      install: # system flatpaks we want all users to have and not remove
+        - org.mozilla.firefox
+        - com.github.tchx84.Flatseal
+        - io.github.flattool.Warehouse
+        - io.missioncenter.MissionCenter
+        - com.github.rafostar.Clapper
+        - org.gnome.Loupe
