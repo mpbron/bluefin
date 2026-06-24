@@ -1,0 +1,74 @@
+type: dnf
+repos:
+  cleanup: true
+  copr:
+    - ublue-os/packages
+  nonfree: rpmfusion
+install:
+  allow-erasing: true
+  exclude:
+    - alacritty
+    - waybar
+    - mako
+    - swaybg
+    - swaylock
+    - swayidle
+  packages:
+    - adw-gtk3-theme
+    - btop
+    - bat
+    - bluez-tools
+    - eza
+    - fd-find
+    - fzf
+    - firewall-config
+    - fuse-overlayfs
+    - fprintd
+    - fprintd-pam
+    - gcr
+    - gnome-keyring
+    - gvfs
+    - gvfs-mtp
+    - gvfs-fuse
+    - gvfs-archive
+    - gvfs-nfs
+    - gvfs-smb
+    - kitty
+    - nautilus
+    - noctalia-shell
+    - blueman-nautilus
+    - greetd
+    - gtkgreet
+    - greetd-selinux
+    - nautilus-python
+    - NetworkManager-openvpn
+    - nm-connection-editor
+    - niri
+    - python3-pyqt6
+    - papirus-icon-theme
+    - nwg-look
+    - polkit
+    - mate-polkit
+    - podman-compose
+    - qt5-qtwayland
+    - qt6ct
+    - qt6-qtwayland
+    - tldr
+    - tuned-ppd
+    - ublue-os-just
+    - uupd
+    - wtype
+    - wl-mirror
+    - xdg-desktop-portal-gnome
+    - xdg-desktop-portal-gtk
+    - xwayland-satellite
+    - zoxide
+    - xdg-user-dirs
+    
+remove:
+  auto-remove: true
+  packages:
+    - weston
+    - firefox
+    - firefox-langpacks
+    - waybar
