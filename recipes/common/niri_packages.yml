@@ -4,6 +4,7 @@ repos:
   copr:
     - ublue-os/packages
     - celestelove/app2unit
+    - tofik/nwg-shell
 install:
   allow-erasing: true
   exclude:
