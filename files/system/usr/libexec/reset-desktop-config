@@ -1,0 +1,264 @@
+#!/usr/bin/env bash
+# reset-desktop-config — quarantine per-user desktop configuration after
+# rebasing between images that ship different desktop environments.
+#
+# Nothing is deleted. Every path in MOVE_PATHS is moved into a timestamped
+# backup under $HOME, except the KEEP_PATHS that hold credentials or bulk
+# data — those are put straight back. A restore.sh is written next to the
+# backup so the whole thing can be undone.
+#
+# Files and directories that do not start with a dot are never touched, so
+# Documents, Downloads, Development and friends are out of scope by design.
+#
+# Run it from a TTY (Ctrl+Alt+F3) after booting the new image and *before*
+# logging into the new desktop, otherwise the session writes its config back
+# out from memory when it exits.
+
+set -euo pipefail
+
+DRY_RUN=1
+FORCE=0
+DROP_CACHE=0
+DO_SYSTEM=0
+
+# Per-user desktop state. Moved aside so the new image's defaults apply.
+MOVE_PATHS=(
+    .config
+    .local/share
+    .local/state
+    .cache
+    .dbus
+    .gnome
+    .gnome2
+    .kde
+    .kde4
+    .kderc
+    .gtkrc-2.0
+    .gtkrc-2.0-kde4
+    .ICEauthority
+    .Xauthority
+    .esd_auth
+    .recently-used.xbel
+    .xsession-errors
+    .xsession-errors.old
+)
+
+# Kept in place: secrets, and data that is expensive or impossible to rebuild.
+# These live inside the trees above, so they are moved out and then restored.
+KEEP_PATHS=(
+    .config/gh
+    .config/rclone
+    .config/onedrive
+    .config/sops
+    .config/Code
+    .config/Positron
+    .config/nvim
+    .local/share/keyrings
+    .local/share/flatpak
+    .local/share/containers
+    .local/share/distrobox
+    .local/share/fonts
+    .local/share/nix
+    .local/share/Steam
+    .local/share/uv
+    .local/share/winapps
+)
+
+# Extra paths to preserve, colon-separated, relative to $HOME:
+#   KEEP_EXTRA=.config/nvim:.config/niri reset-desktop-config --apply
+if [[ -n ${KEEP_EXTRA:-} ]]; then
+    IFS=: read -r -a extra <<<"$KEEP_EXTRA"
+    KEEP_PATHS+=("${extra[@]}")
+fi
+
+usage() {
+    cat <<EOF
+Usage: ${0##*/} [--apply] [--force] [--drop-cache] [--system]
+
+  --apply       Actually move things. Without it, only print the plan.
+  --force       Run even inside a graphical session (not advised).
+  --drop-cache  Delete ~/.cache instead of backing it up.
+  --system      Also reset the stale session record in /var/lib/AccountsService
+                and report leftovers in /etc. Uses sudo.
+
+Preserve additional paths with KEEP_EXTRA=.config/nvim:.config/niri
+EOF
+}
+
+while (($#)); do
+    case $1 in
+        --apply) DRY_RUN=0 ;;
+        --force) FORCE=1 ;;
+        --drop-cache) DROP_CACHE=1 ;;
+        --system) DO_SYSTEM=1 ;;
+        -h | --help)
+            usage
+            exit 0
+            ;;
+        *)
+            printf 'Unknown option: %s\n\n' "$1" >&2
+            usage >&2
+            exit 2
+            ;;
+    esac
+    shift
+done
+
+if ((EUID == 0)); then
+    echo "Run this as your own user, not root — it operates on \$HOME." >&2
+    exit 1
+fi
+
+if ((DRY_RUN == 0 && FORCE == 0)) && [[ ${XDG_SESSION_TYPE:-tty} == wayland || ${XDG_SESSION_TYPE:-tty} == x11 ]]; then
+    cat >&2 <<EOF
+A graphical session is active (XDG_SESSION_TYPE=$XDG_SESSION_TYPE).
+The desktop will write its configuration back out when it exits, undoing
+most of this. Log out, switch to a TTY with Ctrl+Alt+F3, and run it there.
+Use --force to override.
+EOF
+    exit 1
+fi
+
+TS=$(date +%Y%m%d-%H%M%S)
+BACKUP=$HOME/.desktop-reset-$TS
+TREE=$BACKUP/home
+
+# Work out what to do against the live filesystem before touching anything,
+# so that --apply and the dry run print the same plan.
+moving=()
+for p in "${MOVE_PATHS[@]}"; do
+    [[ -e $HOME/$p || -L $HOME/$p ]] && moving+=("$p")
+done
+
+keeping=()
+orphans=()
+for k in "${KEEP_PATHS[@]}"; do
+    [[ -e $HOME/$k || -L $HOME/$k ]] || continue
+    covered=0
+    for p in "${moving[@]}"; do
+        [[ $k == "$p"/* ]] && covered=1 && break
+    done
+    if ((covered)); then
+        keeping+=("$k")
+    else
+        orphans+=("$k")
+    fi
+done
+
+if ((${#moving[@]} == 0)); then
+    echo "Nothing to do: none of the desktop config paths exist."
+    exit 0
+fi
+
+echo "Backup directory: $BACKUP"
+echo
+echo "Moving aside:"
+for p in "${moving[@]}"; do
+    if [[ $p == .cache ]] && ((DROP_CACHE)); then
+        printf '  ~/%-24s (deleted, --drop-cache)\n' "$p"
+    else
+        printf '  ~/%-24s %s\n' "$p" "$(du -sh "$HOME/$p" 2>/dev/null | cut -f1)"
+    fi
+done
+echo
+if ((${#keeping[@]})); then
+    echo "Restored afterwards:"
+    printf '  ~/%s\n' "${keeping[@]}"
+    echo
+fi
+if ((${#orphans[@]})); then
+    echo "Already out of scope, left alone:"
+    printf '  ~/%s\n' "${orphans[@]}"
+    echo
+fi
+
+if ((DRY_RUN)); then
+    echo "Dry run — nothing changed. Re-run with --apply to do it."
+    exit 0
+fi
+
+mkdir -p "$TREE"
+
+for p in "${moving[@]}"; do
+    if [[ $p == .cache ]] && ((DROP_CACHE)); then
+        rm -rf -- "$HOME/$p"
+        continue
+    fi
+    mkdir -p "$TREE/$(dirname "$p")"
+    mv -- "$HOME/$p" "$TREE/$p"
+done
+
+for k in "${keeping[@]}"; do
+    [[ -e $TREE/$k || -L $TREE/$k ]] || continue
+    mkdir -p "$HOME/$(dirname "$k")"
+    mv -- "$TREE/$k" "$HOME/$k"
+done
+
+{
+    printf '# reset-desktop-config %s\n\n' "$TS"
+    printf 'moved aside:\n'
+    printf '  ~/%s\n' "${moving[@]}"
+    ((${#keeping[@]})) && { printf '\nkept in place:\n'; printf '  ~/%s\n' "${keeping[@]}"; }
+} >"$BACKUP/MANIFEST"
+
+cat >"$BACKUP/restore.sh" <<'EOF'
+#!/usr/bin/env bash
+# Merge this backup back over $HOME. Files kept in place win, since they were
+# moved out of the tree before it was written; everything else is overwritten.
+set -euo pipefail
+here=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
+[[ -d $here/home ]] || { echo "no home/ tree in $here" >&2; exit 1; }
+cp -a -- "$here/home/." "$HOME/"
+echo "Restored from $here. Log out and back in."
+EOF
+chmod +x "$BACKUP/restore.sh"
+
+echo "Done. Backup in $BACKUP (undo with $BACKUP/restore.sh)."
+echo
+
+# Flatpaks installed for the old desktop stay installed; they are in /var,
+# which a rebase does not touch. Report, do not remove — some are wanted.
+if command -v flatpak >/dev/null; then
+    stale=$(flatpak list --app --columns=application,installation 2>/dev/null |
+        grep -E '^org\.(kde|gnome)\.' || true)
+    if [[ -n $stale ]]; then
+        echo "Desktop-specific Flatpaks still installed (they live in /var, which"
+        echo "a rebase does not touch):"
+        sed 's/^/  /' <<<"$stale"
+        echo "  Remove the ones you no longer want, per installation:"
+        echo "    flatpak uninstall --system <app>...   # asks for authentication"
+        echo "    flatpak uninstall --user <app>..."
+        echo "    flatpak uninstall --unused"
+        echo
+    fi
+fi
+
+echo "User systemd units you had enabled by hand under ~/.config/systemd/user"
+echo "are in the backup and no longer active; units enabled by the image are"
+echo "unaffected."
+
+if ((DO_SYSTEM)); then
+    echo
+    echo "== System state =="
+
+    # AccountsService records the last session per user; after a desktop
+    # switch it can point the greeter at a session that no longer exists.
+    acct=/var/lib/AccountsService/users/$USER
+    if sudo test -f "$acct"; then
+        echo "Session record $acct:"
+        sudo grep -E '^(Session|XSession)=' "$acct" || echo "  (no session keys)"
+        sudo mv -- "$acct" "$acct.bak-$TS"
+        echo "  moved to $acct.bak-$TS; it is regenerated on next login."
+    fi
+
+    echo
+    echo "Local modifications in /etc, relative to the image default."
+    echo "M = you changed it, A = you added it. Both survive a rebase, so"
+    echo "anything here belonging to the old desktop is now cruft:"
+    sudo ostree admin config-diff | grep -vE '^ ' || echo "  (none)"
+
+    echo
+    echo -n "display-manager.service -> "
+    readlink -f /etc/systemd/system/display-manager.service 2>/dev/null ||
+        echo "(not set in /etc; the image default applies)"
+fi

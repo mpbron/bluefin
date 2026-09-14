@@ -27,6 +27,7 @@ jobs:
           #- recipe_gnome_surface.yml
           #- recipe_kde_surface.yml
           - recipe_kde.yml
+          - recipe_gnome_niri.yml
           #- recipe_kde_evdi.yml
           #- recipe_hyprland.yml
     steps:
