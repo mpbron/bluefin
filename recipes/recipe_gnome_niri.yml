@@ -19,6 +19,9 @@ modules:
   - from-file: common/niri_packages.yml
 
   - type: dnf
+    repos:
+      copr:
+        - zeno/scrcpy
     install:
       packages:
         - onedrive
