@@ -23,7 +23,7 @@ start = [ "launcher", "wallpaper", "workspaces", "active_window" ]
 [dock]
 active_monitor_only = true
 enabled = true
-pinned = [ "org.gnome.Nautilus", "org.mozilla.firefox", "code", "org.zotero.Zotero" ]
+pinned = [ "org.gnome.Nautilus", "org.mozilla.firefox", "code"]
 position = "left"
 
 [shell]
