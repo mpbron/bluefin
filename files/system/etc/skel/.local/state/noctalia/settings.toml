@@ -35,7 +35,7 @@ polkit_agent = true
 # Open-source placeholder (see /etc/dconf/db/local.d/00-appearance for the same
 # reasoning on the GTK side) — swap locally once noctalia is running:
 #   Settings > look and feel, or edit this file directly.
-font_family = "Fira Sans Condensed"
+font_family = "FiraGo"
 
 [theme]
 builtin = "Gruvbox"
