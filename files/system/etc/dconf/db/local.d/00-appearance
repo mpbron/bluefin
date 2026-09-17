@@ -1,0 +1,5 @@
+[org/gnome/desktop/interface]
+font-name='Fira Sans Condensed 12'
+document-font-name='FiraGO 11'
+monospace-font-name='Fira Code 11'
+icon-theme='Papirus'

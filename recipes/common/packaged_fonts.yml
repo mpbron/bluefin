@@ -1,6 +1,14 @@
 type: dnf
+repos:
+  copr:
+    # Not yet in official Fedora repos; same bboxtype foundry/spec style as the
+    # already-official bbox-firago-fonts. Provides Fira Sans Condensed, used as
+    # the image's default interface font (a placeholder for the corporate
+    # Nokia Sans Condensed font, which can't be shipped in this public repo).
+    - mateusrodcosta/fira-fonts
 install:
   allow-erasing: true
   packages:
-    - fira-code-fonts 
+    - fira-code-fonts
     - bbox-firago-fonts
+    - bbox-fira-sans-fonts

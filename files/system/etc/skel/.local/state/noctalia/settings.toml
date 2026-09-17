@@ -1,6 +1,55 @@
+[osd.kinds]
+media = false
+
+[bar.default]
+capsule_group = []
+center = [ "date", "clock", "spacer_2", "media" ]
+end = [
+    "tray",
+    "notifications",
+    "clipboard",
+    "network",
+    "bluetooth",
+    "volume",
+    "brightness",
+    "battery",
+    "caffeine",
+    "nightlight",
+    "control-center",
+    "session"
+]
+start = [ "launcher", "wallpaper", "workspaces", "active_window" ]
+
+[dock]
+active_monitor_only = true
+enabled = true
+pinned = [ "org.gnome.Nautilus", "org.mozilla.firefox", "code", "org.zotero.Zotero" ]
+position = "left"
+
 [shell]
 # Without this, no polkit authentication agent runs in the niri session at all —
 # noctalia's built-in one defaults to off, and nothing else provides one (niri, unlike
 # GNOME Shell/Plasma, has no agent of its own). Anything needing admin auth (e.g.
 # Nautilus' "Enter Administrator Mode") silently fails instead of prompting without it.
 polkit_agent = true
+# Open-source placeholder (see /etc/dconf/db/local.d/00-appearance for the same
+# reasoning on the GTK side) — swap locally once noctalia is running:
+#   Settings > look and feel, or edit this file directly.
+font_family = "Fira Sans Condensed"
+
+[theme]
+builtin = "Gruvbox"
+mode = "light"
+source = "wallpaper"
+wallpaper_scheme = "m3-monochrome"
+
+    # Extends theme colors to GTK3/GTK4, niri (border/focus-ring/tab colors via
+    # ~/.config/niri/noctalia.kdl, included from ~/.config/niri/config.kdl —
+    # see that file), and Qt apps. Applied on theme/wallpaper change, or
+    # on demand with `noctalia msg templates-apply`.
+    [theme.templates]
+    builtin_ids = [ "gtk3", "gtk4", "niri", "qt" ]
+
+[widget.spacer_2]
+length = 112
+type = "spacer"
