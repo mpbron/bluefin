@@ -107,6 +107,10 @@ environment {
 
 spawn-at-startup "xwayland-satellite"
 spawn-at-startup "noctalia"
+// Provides the NetworkManager secret agent (org.freedesktop.NetworkManager.SecretAgent).
+// Without it, nothing in the niri session can persist a new Wi-Fi password to disk —
+// GNOME Shell provides this in the GNOME session, but niri has no equivalent built in.
+spawn-at-startup "nm-applet" "--indicator"
 spawn-at-startup "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP"
 
 // Settings that influence how windows are positioned and sized.

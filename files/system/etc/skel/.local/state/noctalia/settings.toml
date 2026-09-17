@@ -1,0 +1,6 @@
+[shell]
+# Without this, no polkit authentication agent runs in the niri session at all —
+# noctalia's built-in one defaults to off, and nothing else provides one (niri, unlike
+# GNOME Shell/Plasma, has no agent of its own). Anything needing admin auth (e.g.
+# Nautilus' "Enter Administrator Mode") silently fails instead of prompting without it.
+polkit_agent = true

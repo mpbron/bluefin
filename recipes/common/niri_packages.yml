@@ -37,6 +37,7 @@ install:
     - blueman-nautilus
     - nautilus-python
     - NetworkManager-openvpn
+    - network-manager-applet
     - nm-connection-editor
     - niri
     - nwg-look
