@@ -201,7 +201,7 @@ binds {
 
     // Terminal + noctalia's own launcher/control-center/window-switcher.
     Mod+Return hotkey-overlay-title="Open a Terminal: ptyxis" { spawn "ptyxis" "--new-window"; }
-    Mod+Space hotkey-overlay-title="Open the Launcher" { spawn-sh "noctalia msg panel-toggle launcher"; }
+    Mod+D hotkey-overlay-title="Open the Launcher" { spawn-sh "noctalia msg panel-toggle launcher"; }
     Mod+S hotkey-overlay-title="Open the Control Center" { spawn-sh "noctalia msg panel-toggle control-center"; }
     Alt+Tab { spawn-sh "noctalia msg window-switcher"; }
     Super+Escape hotkey-overlay-title="Lock the Screen" { spawn-sh "noctalia msg session lock"; }
