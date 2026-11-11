@@ -31,6 +31,7 @@ install:
     - gvfs-fuse
     - gvfs-archive
     - gvfs-smb
+    - kanshi
     - kitty
     - nautilus
     - noctalia
@@ -47,6 +48,7 @@ install:
     - qt6-qtwayland
     - tldr
     - tuned-ppd
+    - wdisplays
     - wl-mirror
     - xdg-desktop-portal-gnome
     - xdg-desktop-portal-gtk
