@@ -29,7 +29,6 @@ install:
     - gvfs
     - gvfs-mtp
     - gvfs-fuse
-    - gvfs-archive
     - gvfs-smb
     - kanshi
     - kitty
