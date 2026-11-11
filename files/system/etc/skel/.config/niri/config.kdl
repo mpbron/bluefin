@@ -213,11 +213,12 @@ binds {
     XF86AudioMute { spawn-sh "noctalia msg volume-mute"; }
     XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
 
-    // Media keys via playerctl (works with any MPRIS-enabled player).
-    XF86AudioPlay        allow-when-locked=true { spawn-sh "playerctl play-pause"; }
-    XF86AudioStop        allow-when-locked=true { spawn-sh "playerctl stop"; }
-    XF86AudioPrev        allow-when-locked=true { spawn-sh "playerctl previous"; }
-    XF86AudioNext        allow-when-locked=true { spawn-sh "playerctl next"; }
+    // Media keys via noctalia
+    XF86AudioPlay        allow-when-locked=true { spawn "noctalia" "msg" "media" "toggle"; }
+    XF86AudioStop        allow-when-locked=true { spawn "noctalia" "msg" "media" "stop"; }
+    XF86AudioPrev        allow-when-locked=true { spawn "noctalia" "msg" "media" "previous"; }
+    XF86AudioNext        allow-when-locked=true { spawn "noctalia" "msg" "media" "next"; }
+
 
     XF86MonBrightnessUp { spawn-sh "noctalia msg brightness-up"; }
     XF86MonBrightnessDown { spawn-sh "noctalia msg brightness-down"; }
@@ -349,6 +350,11 @@ binds {
     Print { screenshot; }
     Ctrl+Print { screenshot-screen; }
     Alt+Print { screenshot-window; }
+
+    // Apple keyboards have no Print key; F13 stands in for it (xkb maps KEY_F13 to XF86Tools).
+    XF86Tools { screenshot; }
+    Ctrl+XF86Tools { screenshot-screen; }
+    Alt+XF86Tools { screenshot-window; }
 
     Mod+Ctrl+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
 

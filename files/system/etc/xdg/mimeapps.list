@@ -1,0 +1,6 @@
+[Default Applications]
+application/pdf=org.gnome.Papers.desktop
+application/vnd.flatpak.ref=io.github.kolunmi.Bazaar.desktop
+application/vnd.appimage=noop.desktop
+x-scheme-handler/eds-oauth2=org.gnome.Evolution.OAuth2-handler.desktop
+x-scheme-handler/com.googleusercontent.apps.590402290962-2i0b7rqma8b9nmtfrcp7fa06g6cf7g74=org.gnome.Evolution.OAuth2-handler.desktop

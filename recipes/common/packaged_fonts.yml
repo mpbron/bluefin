@@ -3,4 +3,5 @@ install:
   allow-erasing: true
   packages:
     - fira-code-fonts
-    - bbox-firago-fonts
+    # FiraGO: bbox-firago-fonts was retired before Fedora 45; the fonts are now
+    # shipped from files/system/usr/share/fonts/firago (upstream 1.001, OFL).

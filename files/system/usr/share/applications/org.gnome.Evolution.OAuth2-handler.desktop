@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Evolution (Flatpak) OAuth2 Handler
+Comment=Routes OAuth2 login redirects to Evolution's own flatpak sandbox instead of the host's unrelated evolution-data-server
+Exec=flatpak run --command=/app/libexec/evolution-data-server/evolution-oauth2-handler org.gnome.Evolution %u
+Terminal=false
+NoDisplay=true
+MimeType=x-scheme-handler/com.googleusercontent.apps.590402290962-2i0b7rqma8b9nmtfrcp7fa06g6cf7g74;x-scheme-handler/eds-oauth2;
