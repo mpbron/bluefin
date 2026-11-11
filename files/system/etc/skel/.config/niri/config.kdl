@@ -31,7 +31,7 @@ input {
     }
 
     touchpad {
-        tap
+        // tap  // disabled: physically press the touchpad to click
         natural-scroll
     }
 
